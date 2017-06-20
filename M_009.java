@@ -4,7 +4,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import java.net.URL;
-import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
@@ -18,21 +17,7 @@ public class M_009 {
 	private StringBuffer verificationErrors = new StringBuffer();
 	WebElement element = null;
 	// boolean setupSuccess = true;
-	private String ID_1 = null;
-	private String ID_2 = null;
-	private String ID_3 = null;
-	private String ID_4 = null;
-	private String ID_5 = null;
-	private String PW_1 = null;
-	private String PW_2 = null;
-	private String PW_3 = null;
-	private String PW_4 = null;
-	private String PW_5 = null;
-	private String P_URL = null;
 	private String M_URL = null;
-	private String NAME = null;
-	private String BIRTH = null;
-	private long waitTime = 50;
 
 	/**
 	 * 
@@ -50,21 +35,8 @@ public class M_009 {
 
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
-		ID_1 = sp.getProperty("ID_1");
-		ID_2 = sp.getProperty("ID_2");
-		ID_3 = sp.getProperty("ID_3");
-		ID_4 = sp.getProperty("ID_4");
-		ID_5 = sp.getProperty("ID_5");
-		PW_1 = sp.getProperty("PW_1");
-		PW_2 = sp.getProperty("PW_2");
-		PW_3 = sp.getProperty("PW_3");
-		PW_4 = sp.getProperty("PW_4");
-		PW_5 = sp.getProperty("PW_5");
-		P_URL = sp.getProperty("P_URL");
 		M_URL = sp.getProperty("M_URL");
-		NAME = sp.getProperty("NAME");
-		BIRTH = sp.getProperty("BIRTH");
-
+	
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
 			caps = DesiredCapabilities.android();
@@ -87,7 +59,7 @@ public class M_009 {
 	}
 
 	@Test
-	public void M_009() throws Exception {
+	public void m_009() throws Exception {
 		
 		driver.get(M_URL);
 		
@@ -119,15 +91,20 @@ public class M_009 {
 		Thread.sleep(3000);
 		
 		driver.findElement(By.xpath("//*[@id='oneName']")).sendKeys("조성주");
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id='oneBirth']")).sendKeys("19880701");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id='simple_find']/span/label")).click();
+		
 		driver.findElement(By.xpath("//*[@id='mb_button']")).click();
 		System.out.println("아이디/생년월일 입력 후 조회 클릭");
 		
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		
 		System.out.println((driver.findElement(By.xpath("//*[@id='txt_success']")).getText()));
 		if ("고객님의 CJmall 아이디는\njsjjo**8입니다.".equals(driver.findElement(By.xpath("//*[@id='txt_success']")).getText())) {
            System.out.println("TC_9 PASS");
+           Thread.sleep(3000);
            assertTrue(true);
            return;
         } else {

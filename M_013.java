@@ -4,7 +4,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import java.net.URL;
-import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
@@ -18,22 +17,8 @@ public class M_013 {
 	private StringBuffer verificationErrors = new StringBuffer();
 	WebElement element = null;
 	// boolean setupSuccess = true;
-	private String ID_1 = null;
-	private String ID_2 = null;
-	private String ID_3 = null;
-	private String ID_4 = null;
-	private String ID_5 = null;
-	private String PW_1 = null;
-	private String PW_2 = null;
-	private String PW_3 = null;
-	private String PW_4 = null;
-	private String PW_5 = null;
-	private String P_URL = null;
 	private String M_URL = null;
-	private String NAME = null;
-	private String BIRTH = null;
-	private long waitTime = 50;
-
+	
 	/**
 	 * 
 	 * @author 조성주 
@@ -50,21 +35,8 @@ public class M_013 {
 
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
-		ID_1 = sp.getProperty("ID_1");
-		ID_2 = sp.getProperty("ID_2");
-		ID_3 = sp.getProperty("ID_3");
-		ID_4 = sp.getProperty("ID_4");
-		ID_5 = sp.getProperty("ID_5");
-		PW_1 = sp.getProperty("PW_1");
-		PW_2 = sp.getProperty("PW_2");
-		PW_3 = sp.getProperty("PW_3");
-		PW_4 = sp.getProperty("PW_4");
-		PW_5 = sp.getProperty("PW_5");
-		P_URL = sp.getProperty("P_URL");
 		M_URL = sp.getProperty("M_URL");
-		NAME = sp.getProperty("NAME");
-		BIRTH = sp.getProperty("BIRTH");
-
+		
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
 			caps = DesiredCapabilities.android();
@@ -87,7 +59,7 @@ public class M_013 {
 	}
 
 	@Test
-	public void M_013() throws Exception {
+	public void m_013() throws Exception {
 		
 		driver.get(M_URL);
 		
@@ -122,12 +94,13 @@ public class M_013 {
 		driver.findElement(By.xpath("//*[@id='idFindBtn']")).click();
 		System.out.println("잘못된 아이디 입력 후 조회 클릭");
 		//잘못된 아이디 입력후 조회 클릭
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		
 		System.out.println(driver.switchTo().alert().getText());
 		//alert check
 		 if ("정확한 아이디를 입력해주십시오. CJmall약관동의를 하지 않은 CJ ONE 아이디일 경우, CJ ONE 홈페이지에서 비밀번호 찾기를 해주십시오.".equals(driver.switchTo().alert().getText())) {
 		        System.out.println("TC_13 PASS");
+		        Thread.sleep(3000);
 		        assertTrue(true);
 		        return;
 		     } else {

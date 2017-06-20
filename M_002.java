@@ -4,7 +4,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import java.net.URL;
-import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
@@ -19,21 +18,9 @@ public class M_002 {
 	WebElement element = null;
 	// boolean setupSuccess = true;
 	private String ID_1 = null;
-	private String ID_2 = null;
-	private String ID_3 = null;
-	private String ID_4 = null;
-	private String ID_5 = null;
 	private String PW_1 = null;
-	private String PW_2 = null;
-	private String PW_3 = null;
-	private String PW_4 = null;
-	private String PW_5 = null;
-	private String P_URL = null;
 	private String M_URL = null;
-	private String NAME = null;
-	private String BIRTH = null;
-	private long waitTime = 50;
-
+	
 	/**
 	 * 
 	 * @author 조성주 
@@ -51,20 +38,9 @@ public class M_002 {
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
 		ID_1 = sp.getProperty("ID_1");
-		ID_2 = sp.getProperty("ID_2");
-		ID_3 = sp.getProperty("ID_3");
-		ID_4 = sp.getProperty("ID_4");
-		ID_5 = sp.getProperty("ID_5");
 		PW_1 = sp.getProperty("PW_1");
-		PW_2 = sp.getProperty("PW_2");
-		PW_3 = sp.getProperty("PW_3");
-		PW_4 = sp.getProperty("PW_4");
-		PW_5 = sp.getProperty("PW_5");
-		P_URL = sp.getProperty("P_URL");
 		M_URL = sp.getProperty("M_URL");
-		NAME = sp.getProperty("NAME");
-		BIRTH = sp.getProperty("BIRTH");
-
+		
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
 			caps = DesiredCapabilities.android();
@@ -87,7 +63,7 @@ public class M_002 {
 	}
 
 	@Test
-	public void M_002() throws Exception {
+	public void m_002() throws Exception {
 		
 		driver.get(M_URL);
 		
@@ -111,19 +87,12 @@ public class M_002 {
 		System.out.println("좌측카테고리 버튼 클릭");
 		
 		driver.findElement(By.xpath("//*[@id='gnb']/div[1]/a")).click();
-		//로그인 텍스트 클릭
-		Thread.sleep(3000);
-		System.out.println("로그인 텍스트 클릭");
+		driver.findElement(By.xpath("//*[@id='id_input']")).clear();
 		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys(ID_1);
-		//아이디 값 입력
-		System.out.println("아이디 값 입력");
-		driver.findElement(By.xpath("//*[@id='password_input']")).sendKeys(PW_1);
-		// 패스워드 값 입력
-		System.out.println("패스워드 값 입력");
-		driver.findElement(By.xpath("//*[@id='loginSubmit']")).click();
-		
-		//로그인 클릭
-		System.out.println("로그인 클릭");
+		driver.findElement(By.xpath(".//*[@id='password_input']")).clear();
+		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys(PW_1);
+		driver.findElement(By.xpath(".//*[@id='content']/div[1]/div[2]/fieldset/div[2]")).click();
+		driver.findElement(By.xpath(".//*[@id='loginSubmit']")).click();
 		
 		Thread.sleep(3000);
 		
@@ -141,12 +110,13 @@ public class M_002 {
 		
 		driver.findElement(By.xpath("//*[@id='header']/div[2]/a[1]")).click();
 		//좌측카테고리 버튼 클릭
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		System.out.println("좌측카테고리 버튼 클릭");
 		
 		
 		if ("조*주".equals(driver.findElement(By.xpath("//*[@id='gnb']/div[1]/p/strong")).getText())) {
             System.out.println("TC_2 PASS");
+            Thread.sleep(3000);
             assertTrue(true);
             return;
          } else {

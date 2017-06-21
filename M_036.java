@@ -4,7 +4,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import java.net.URL;
-import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
@@ -19,20 +18,8 @@ public class M_036 {
 	WebElement element = null;
 	// boolean setupSuccess = true;
 	private String ID_1 = null;
-	private String ID_2 = null;
-	private String ID_3 = null;
-	private String ID_4 = null;
-	private String ID_5 = null;
 	private String PW_1 = null;
-	private String PW_2 = null;
-	private String PW_3 = null;
-	private String PW_4 = null;
-	private String PW_5 = null;
-	private String P_URL = null;
 	private String M_URL = null;
-	private String NAME = null;
-	private String BIRTH = null;
-	private long waitTime = 50;
 	private String PRODUCT = null;
 	/**
 	 * 
@@ -51,19 +38,8 @@ public class M_036 {
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
 		ID_1 = sp.getProperty("ID_1");
-		ID_2 = sp.getProperty("ID_2");
-		ID_3 = sp.getProperty("ID_3");
-		ID_4 = sp.getProperty("ID_4");
-		ID_5 = sp.getProperty("ID_5");
 		PW_1 = sp.getProperty("PW_1");
-		PW_2 = sp.getProperty("PW_2");
-		PW_3 = sp.getProperty("PW_3");
-		PW_4 = sp.getProperty("PW_4");
-		PW_5 = sp.getProperty("PW_5");
-		P_URL = sp.getProperty("P_URL");
 		M_URL = sp.getProperty("M_URL");
-		NAME = sp.getProperty("NAME");
-		BIRTH = sp.getProperty("BIRTH");
 		PRODUCT = sp.getProperty("PRODUCT");
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
@@ -77,17 +53,51 @@ public class M_036 {
 			driver = new AndroidDriver<WebElement>(appiumUrl, caps);
 
 		} catch (Exception e) {
-			System.out.println("Session Creation failed.");
-			e.printStackTrace();
-			assertTrue(true);
-			// setupSuccess = false;
-			return;
-		}
+			try {
+				Thread.sleep(5000);
+				DesiredCapabilities caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.android();
 
+				// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+				caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
+				caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+				caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+				URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
+				System.out.println("Start driver.");
+				driver = new AndroidDriver<WebElement>(appiumUrl, caps);
+
+			} catch (Exception e1) {
+				{
+					try {
+						Thread.sleep(5000);
+						DesiredCapabilities caps = new DesiredCapabilities();
+						caps = DesiredCapabilities.android();
+
+						// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+						caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
+						caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+						caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+						URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
+						System.out.println("Start driver.");
+						driver = new AndroidDriver<WebElement>(appiumUrl, caps);
+
+					} catch (Exception e2) {
+						System.out.println("Session Creation failed.");
+						e.printStackTrace();
+						assertTrue(false);
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	@Test
-	public void M_036() throws Exception {
+	public void m_036() throws Exception {
 		
 		driver.get(M_URL);
 		
@@ -132,17 +142,19 @@ public class M_036 {
 		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys(ID_1);
 		driver.findElement(By.xpath(".//*[@id='password_input']")).clear();
 		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys(PW_1);
+		driver.findElement(By.xpath(".//*[@id='content']/div[1]/div[2]/fieldset/div[2]")).click();
 		driver.findElement(By.xpath(".//*[@id='loginSubmit']")).click();
 		System.out.println("로그인 성공");
 		Thread.sleep(15000);
 		driver.findElement(By.xpath("//*[@id='header']/div/a[3]/div")).click();
 		//장바구니진입
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		System.out.println(driver.findElement(By.xpath("//*[@id='header']/div/h1")).getText());
 		// text check
 		if ("장바구니".equals(driver.findElement(By.xpath("//*[@id='header']/div/h1")).getText())) {
 			Thread.sleep(3000);
 			driver.findElement(By.xpath("//*[@id='_fullBasket']/div[2]/div/div[1]/div[1]/button")).click();
+			Thread.sleep(3000);
 			System.out.println("TC_36 PASS");
 			assertTrue(true);
 			return;

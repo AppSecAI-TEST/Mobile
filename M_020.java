@@ -41,24 +41,62 @@ public class M_020 {
 		M_URL = sp.getProperty("M_URL");
 		
 		try {
+			Thread.sleep(5000);
 			DesiredCapabilities caps = new DesiredCapabilities();
 			caps = DesiredCapabilities.android();
-			// Devices Name 은 아무거나 입력해도 상관없음
-			caps.setCapability(MobileCapabilityType.DEVICE_NAME, "1a66dc8f");
+
+			// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+			caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
 			caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
 			caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
 			URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
 			System.out.println("Start driver.");
 			driver = new AndroidDriver<WebElement>(appiumUrl, caps);
 
 		} catch (Exception e) {
-			System.out.println("Session Creation failed.");
-			e.printStackTrace();
-			assertTrue(true);
-			// setupSuccess = false;
-			return;
-		}
+			try {
+				Thread.sleep(5000);
+				DesiredCapabilities caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.android();
 
+				// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+				caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
+				caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+				caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+				URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
+				System.out.println("Start driver.");
+				driver = new AndroidDriver<WebElement>(appiumUrl, caps);
+
+			} catch (Exception e1) {
+				{
+					try {
+						Thread.sleep(5000);
+						DesiredCapabilities caps = new DesiredCapabilities();
+						caps = DesiredCapabilities.android();
+
+						// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+						caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
+						caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+						caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+						URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
+						System.out.println("Start driver.");
+						driver = new AndroidDriver<WebElement>(appiumUrl, caps);
+
+					} catch (Exception e2) {
+						System.out.println("Session Creation failed.");
+						e.printStackTrace();
+						assertTrue(false);
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	@Test

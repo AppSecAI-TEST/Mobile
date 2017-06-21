@@ -4,7 +4,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import java.net.URL;
-import java.util.Set;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
@@ -18,21 +17,7 @@ public class M_025 {
 	private StringBuffer verificationErrors = new StringBuffer();
 	WebElement element = null;
 	// boolean setupSuccess = true;
-	private String ID_1 = null;
-	private String ID_2 = null;
-	private String ID_3 = null;
-	private String ID_4 = null;
-	private String ID_5 = null;
-	private String PW_1 = null;
-	private String PW_2 = null;
-	private String PW_3 = null;
-	private String PW_4 = null;
-	private String PW_5 = null;
-	private String P_URL = null;
 	private String M_URL = null;
-	private String NAME = null;
-	private String BIRTH = null;
-	private long waitTime = 50;
 	private String PRODUCT = null;
 	/**
 	 * 
@@ -50,20 +35,7 @@ public class M_025 {
 
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
-		ID_1 = sp.getProperty("ID_1");
-		ID_2 = sp.getProperty("ID_2");
-		ID_3 = sp.getProperty("ID_3");
-		ID_4 = sp.getProperty("ID_4");
-		ID_5 = sp.getProperty("ID_5");
-		PW_1 = sp.getProperty("PW_1");
-		PW_2 = sp.getProperty("PW_2");
-		PW_3 = sp.getProperty("PW_3");
-		PW_4 = sp.getProperty("PW_4");
-		PW_5 = sp.getProperty("PW_5");
-		P_URL = sp.getProperty("P_URL");
 		M_URL = sp.getProperty("M_URL");
-		NAME = sp.getProperty("NAME");
-		BIRTH = sp.getProperty("BIRTH");
 		PRODUCT = sp.getProperty("PRODUCT");
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
@@ -77,17 +49,51 @@ public class M_025 {
 			driver = new AndroidDriver<WebElement>(appiumUrl, caps);
 
 		} catch (Exception e) {
-			System.out.println("Session Creation failed.");
-			e.printStackTrace();
-			assertTrue(true);
-			// setupSuccess = false;
-			return;
-		}
+			try {
+				Thread.sleep(5000);
+				DesiredCapabilities caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.android();
 
+				// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+				caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
+				caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+				caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+				URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
+				System.out.println("Start driver.");
+				driver = new AndroidDriver<WebElement>(appiumUrl, caps);
+
+			} catch (Exception e1) {
+				{
+					try {
+						Thread.sleep(5000);
+						DesiredCapabilities caps = new DesiredCapabilities();
+						caps = DesiredCapabilities.android();
+
+						// device name은 큰 의미없음. LG폰도 이 옵션으로 수행됨
+						caps.setCapability(MobileCapabilityType.DEVICE_NAME, "LGF460S859d639d");
+						caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+						caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+						URL appiumUrl = new URL("http://127.0.0.1:4723/wd/hub");
+
+						System.out.println("Start driver.");
+						driver = new AndroidDriver<WebElement>(appiumUrl, caps);
+
+					} catch (Exception e2) {
+						System.out.println("Session Creation failed.");
+						e.printStackTrace();
+						assertTrue(false);
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	@Test
-	public void M_025() throws Exception {
+	public void m_025() throws Exception {
 		
 		driver.get(M_URL);
 		
@@ -127,12 +133,13 @@ public class M_025 {
 		alert.accept();
 		
 		
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 
 		System.out.println(driver.findElement(By.xpath("//*[@id='header']/div/h1")).getText());
 		// text check
 		if ("로그인".equals(driver.findElement(By.xpath("//*[@id='header']/div/h1")).getText())) {
 			System.out.println("TC_25 PASS");
+			Thread.sleep(3000);
 			assertTrue(true);
 			return;
 		} else {

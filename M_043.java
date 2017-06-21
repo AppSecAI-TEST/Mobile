@@ -125,6 +125,34 @@ public class M_043 {
 		driver.findElement(By.xpath("//*[@id='scheduleDate']/div/ul/li[7]/a")).click();
 		System.out.println("다음달 진입");
 		Thread.sleep(3000);
+		boolean isExist4 = false;
+		boolean isExist5 = false;
+		// 상담신청 체크
+		isExist4 = existElement(driver, By.xpath(".//*[@id='scheduleItem']/div[2]/ul/li/a/div[2]/div/span"),
+				"단일 상담신청 상품");
+		isExist5 = existElement(driver, By.xpath(".//*[@id='scheduleItem']/div[2]/ul/li[1]/a/div[2]/div[1]/div/span"),
+				"복수 상담신청 상품");
+		if (isExist4 && driver.findElement(By.xpath(".//*[@id='scheduleItem']/div[2]/ul/li/a/div[2]/div/span"))
+				.getText().equals("상담신청 상품")) {
+			System.out.println("상담신청상품 입니다. (단일)");
+			assertTrue(true);
+			return;
+		} else {
+			// 상담신청 체크 (복수상품)
+			// 대표상품 가격란에 '상담신청상품' 체크
+			if (isExist5
+					&& driver.findElement(By.xpath(".//*[@id='scheduleItem']/div[2]/ul/li[1]/a/div[2]/div[1]/div/span"))
+							.getText().equals("상담신청 상품")) {
+				System.out.println("상담신청상품 입니다. (복수)");
+				assertTrue(true);
+				return;
+			}
+			// 상담신청 상품이 아닐경우 else 진행
+			else {
+				System.out.println("상담신청상품 아닙니다. 계속 진행");
+				Thread.sleep(3000);
+			}
+		}
 		driver.findElement(By.xpath("//*[@id='scheduleItem']/div[2]/ul/li/div/a")).click();
 		System.out.println("방송알림 진입");
 		Thread.sleep(3000);

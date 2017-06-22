@@ -17,8 +17,8 @@ public class M_036 {
 	private StringBuffer verificationErrors = new StringBuffer();
 	WebElement element = null;
 	// boolean setupSuccess = true;
-	private String ID_1 = null;
-	private String PW_1 = null;
+	private String ID_6 = null;
+	private String PW_6 = null;
 	private String M_URL = null;
 	private String PRODUCT = null;
 	/**
@@ -37,8 +37,8 @@ public class M_036 {
 
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
-		ID_1 = sp.getProperty("ID_1");
-		PW_1 = sp.getProperty("PW_1");
+		ID_6 = sp.getProperty("ID_6");
+		PW_6 = sp.getProperty("PW_6");
 		M_URL = sp.getProperty("M_URL");
 		PRODUCT = sp.getProperty("PRODUCT");
 		try {
@@ -139,20 +139,22 @@ public class M_036 {
 		alert.accept();
 		System.out.println("얼럿닫기");
 		driver.findElement(By.xpath("//*[@id='id_input']")).clear();
-		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys(ID_1);
+		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys(ID_6);
 		driver.findElement(By.xpath(".//*[@id='password_input']")).clear();
-		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys(PW_1);
+		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys(PW_6);
 		driver.findElement(By.xpath(".//*[@id='content']/div[1]/div[2]/fieldset/div[2]")).click();
 		driver.findElement(By.xpath(".//*[@id='loginSubmit']")).click();
 		System.out.println("로그인 성공");
 		Thread.sleep(15000);
-		driver.findElement(By.xpath("//*[@id='header']/div/a[3]/div")).click();
-		//장바구니진입
-		Thread.sleep(7000);
-		System.out.println(driver.findElement(By.xpath("//*[@id='header']/div/h1")).getText());
+ 		//장바구니진입
+		System.out.println(driver.findElement(By.xpath("//*[@id='header']/div/a[3]/div/strong")).getText());
 		// text check
-		if ("장바구니".equals(driver.findElement(By.xpath("//*[@id='header']/div/h1")).getText())) {
+		if ("1".equals(driver.findElement(By.xpath("//*[@id='header']/div/a[3]/div/strong")).getText())) {
 			Thread.sleep(3000);
+			System.out.println("1");
+			driver.findElement(By.xpath("//*[@id='header']/div/a[3]/div/strong")).click();
+			Thread.sleep(3000);
+			System.out.println("2");
 			driver.findElement(By.xpath("//*[@id='_fullBasket']/div[2]/div/div[1]/div[1]/button")).click();
 			Thread.sleep(3000);
 			System.out.println("TC_36 PASS");

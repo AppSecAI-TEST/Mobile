@@ -17,8 +17,6 @@ public class M_033 {
 	private StringBuffer verificationErrors = new StringBuffer();
 	WebElement element = null;
 	// boolean setupSuccess = true;
-	private String ID_2 = null;
-	private String PW_2 = null;
 	private String M_URL = null;
 	private String PRODUCT = null;
 	/**
@@ -37,8 +35,6 @@ public class M_033 {
 
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
-		ID_2 = sp.getProperty("ID_1");
-		PW_2 = sp.getProperty("PW_1");
 		M_URL = sp.getProperty("M_URL");
 		PRODUCT = sp.getProperty("PRODUCT");
 		try {
@@ -123,9 +119,9 @@ public class M_033 {
 		//로그인 클릭
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id='id_input']")).clear();
-		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys(ID_2);
+		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys("carttest");
 		driver.findElement(By.xpath(".//*[@id='password_input']")).clear();
-		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys(PW_2);
+		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys("stasta1!");
 		driver.findElement(By.xpath(".//*[@id='content']/div[1]/div[2]/fieldset/div[2]")).click();
 		driver.findElement(By.xpath(".//*[@id='loginSubmit']")).click();
 		System.out.println("로그인 성공");

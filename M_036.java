@@ -17,8 +17,6 @@ public class M_036 {
 	private StringBuffer verificationErrors = new StringBuffer();
 	WebElement element = null;
 	// boolean setupSuccess = true;
-	private String ID_6 = null;
-	private String PW_6 = null;
 	private String M_URL = null;
 	private String PRODUCT = null;
 	/**
@@ -37,8 +35,6 @@ public class M_036 {
 
 		//System.out.println("=====setUp start======");
 		SmartProperties sp = SmartProperties.getInstance();
-		ID_6 = sp.getProperty("ID_6");
-		PW_6 = sp.getProperty("PW_6");
 		M_URL = sp.getProperty("M_URL");
 		PRODUCT = sp.getProperty("PRODUCT");
 		try {
@@ -139,9 +135,9 @@ public class M_036 {
 		alert.accept();
 		System.out.println("얼럿닫기");
 		driver.findElement(By.xpath("//*[@id='id_input']")).clear();
-		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys(ID_6);
+		driver.findElement(By.xpath("//*[@id='id_input']")).sendKeys("carttest");
 		driver.findElement(By.xpath(".//*[@id='password_input']")).clear();
-		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys(PW_6);
+		driver.findElement(By.xpath(".//*[@id='password_input']")).sendKeys("stasta1!");
 		driver.findElement(By.xpath(".//*[@id='content']/div[1]/div[2]/fieldset/div[2]")).click();
 		driver.findElement(By.xpath(".//*[@id='loginSubmit']")).click();
 		System.out.println("로그인 성공");
